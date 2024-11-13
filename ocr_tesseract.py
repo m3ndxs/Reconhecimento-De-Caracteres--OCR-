@@ -1,4 +1,5 @@
 import pytesseract
+import pdf2image
 from pdf2image import convert_from_path
 from PIL import Image
 import os
@@ -19,7 +20,11 @@ def recognize_text_from_image(image_path):
 
 def recognize_text_from_pdf(pdf_path):
     try:
-        pages = convert_from_path(pdf_path)
+        pdf2image.pdfinfo_from_path(
+            pdf_path, poppler_path=r"C:\Program Files\poppler\Library\bin")
+
+        pages = convert_from_path(
+            pdf_path, poppler_path=r"C:\Program Files\poppler\Library\bin")
         extracted_text = ""
 
         for page in pages:
